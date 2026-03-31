@@ -1,0 +1,85 @@
+Week-11 
+Aim:Install Django and Setup Virtual Environment. Design Web Application with Menu Items 
+Goal: Create a simple website with menu pages like Home, About, Services, Contact. 
+E:/Yamuna-FSD>python --version 
+E:/Yamuna-FSD>md CMR 
+E:/Yamuna-FSD>cd CMR 
+E:/Yamuna-FSD/CMR>python -m venvmyenv 
+E:/Yamuna-FSD/CMR>myenv\Scripts\activate 
+(myenv) E:/Yamuna-FSD/CMR> 
+Install Django 
+(myenv) E:/Yamuna-FSD/CMR>pip install django 
+(myenv) E:/Yamuna-FSD/CMR>django-admin --version 
+Create Django Project 
+(myenv) E:/Yamuna-FSD/CMR>django-admin startproject cmrproject 
+(myenv) E:/Yamuna-FSD/CMR>cd cmrproject 
+(myenv) E:/Yamuna-FSD/CMR/cmrproject> 
+Run Program 
+(myenv) E:/Yamuna-FSD/CMR/cmrproject>python manage.py migrate 
+(myenv) E:/Yamuna-FSD/CMR/cmrproject>python manage.py runserver 
+To see output…………..http://127.0.0.1:8000 
+Create App 
+(myenv) E:/Yamuna-FSD/CMR/cmrProject>python manage.py startapp myCMRapp 
+CMR/cmrproject/cmrproject/settings.py 
+TEMPLATES = [ 
+{ 
+'BACKEND': 'django.template.backends.django.DjangoTemplates', 
+'DIRS': [BASE_DIR /'myCMRapp'/'templates'], 
+'APP_DIRS': True, 
+'OPTIONS': { 
+'context_processors': [ 
+'django.template.context_processors.request', 
+'django.contrib.auth.context_processors.auth', 
+'django.contrib.messages.context_processors.messages', 
+], 
+}, 
+}, 
+] 
+INSTALLED_APPS = [ 
+'django.contrib.admin', 
+'django.contrib.auth', 
+'django.contrib.contenttypes', 
+'django.contrib.sessions', 
+'django.contrib.messages', 
+'django.contrib.staticfiles', 
+'myCMRapp', 
+] 
+Yamuna-CSD                                                                                                                                                                                             1 
+cmrproject/cmrproject/urls.py 
+from django.contrib import admin 
+from django.urls import path 
+from myCMRapp import views 
+urlpatterns= [ 
+path('admin/', admin.site.urls), 
+path('', views.home), 
+path('about/', views.about), 
+path('services/', views.services), 
+path('contact/', views.contact), 
+] 
+cmrproject/cmrproject/myCMRapp/templates/menu.html 
+<html> 
+<head> 
+<title>My Django Website</title> 
+</head> 
+<body> 
+<h2>Welcome to My Website</h2> 
+<ul> 
+<li><a href="/">Home</a></li> 
+<li><a href="/about/">About</a></li> 
+<li><a href="/services/">Services</a></li> 
+<li><a href="/contact/">Contact</a></li> 
+</ul> 
+<h3>{{ message }}</h3> 
+</body> 
+</html> 
+cmrproject/cmrproject/myCMRapp/views.py 
+from django.shortcuts import render 
+def home(request): 
+return render(request, "menu.html", {"message": "This is Home Page"}) 
+def about(request): 
+return render(request, "menu.html", {"message": "This is About Page"}) 
+def services(request): 
+return render(request, "menu.html", {"message": "This is Services Page"}) 
+def contact(request): 
+return render(request, "menu.html", {"message": "This is Contact Page"}) 
+Yamuna-CSD                                                                                                                                                                                             2 
