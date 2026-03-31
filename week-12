@@ -1,0 +1,78 @@
+E:\Yamuna-FSD\Week-12 FSD>python --version 
+E:\Yamuna-FSD\Week-12 FSD>md CMR 
+E:\Yamna-FSD\Week-12 FSD>cd CMR 
+E:\Yamuna-FSD\Week-12 FSD>python -m venv myvenv 
+E:\Yamuna-FSD\Week-12 FSD>myvenv\Scripts\activate 
+(myvenv) E:\Yamuna-FSD\Week-12 FSD>pip install django 
+(myvenv) E:\Yamuna-FSD\Week-12 FSD>django-admin startproject restapi 
+(myvenv) E:\Yamuna-FSD\Week-12 FSD>cd restapi 
+(myvenv) E:\Yamuna-FSD\Week-12 FSD\restapi> 
+(myvenv) E:\Yamuna-FSD\Week-12 FSD>python manage.py startapp api 
+
+restapi/restapi/settings.py 
+
+INSTALLED_APPS= [ 
+'django.contrib.admin', 
+'django.contrib.auth', 
+'django.contrib.contenttypes', 
+'django.contrib.sessions', 
+'django.contrib.messages', 
+'django.contrib.staticfiles', 
+'api', 
+] 
+Import os 
+TEMPLATES= [ 
+{ 
+'BACKEND': 'django.template.backends.django.DjangoTemplates', 
+'DIRS': [os.path.join(BASE_DIR, 'templates')], 
+'APP_DIRS': True, 
+'OPTIONS': { 
+'context_processors': [ 
+'django.template.context_processors.request', 
+'django.contrib.auth.context_processors.auth', 
+'django.contrib.messages.context_processors.messages', 
+], 
+}, 
+}, 
+] 
+
+restapi/urls.py 
+
+from django.contrib import admin 
+from django.urls import path, include 
+urlpatterns= [ 
+path('admin/', admin.site.urls), 
+path('', include('api.urls')), 
+] 
+from django.urls import path 
+from.import views 
+urlpatterns= [ 
+path('', views.home), 
+create a file in api/urls.py 
+path('profile/', views.profile), 
+path('api/user/', views.user_api), 
+] 
+create a folder templates at container restapi 
+restapi/templates/home.html 
+<h2>Home Page</h2> 
+<a href="/profile/">Go to Profile</a> 
+restapi/templates/profile.html 
+<h2>User Profile</h2> 
+<p>Name: {{ user.name }}</p> 
+<p>Email: {{ user.email }}</p> 
+api.views.py 
+from django.shortcuts import render 
+from django.http import JsonResponse 
+def home(request): 
+return render(request, 'home.html') 
+def profile(request): 
+user = { 
+"name": "Yamuna", 
+"email": "yamuna@gmail.com" 
+} 
+return render(request, 'profile.html', {'user': user}) 
+def user_api(request): 
+return JsonResponse({ 
+"name": "Yamuna", 
+"email": "yamuna@gmail.com" 
+}) 
