@@ -1,0 +1,85 @@
+app.routes.ts
+
+TypeScript
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home';
+import { AboutComponent } from './about/about';
+import { ContactComponent } from './contact/contact';
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent }
+];
+📄 app.ts
+TypeScript
+import { Component, signal } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.html',
+  standalone: true,
+  styleUrl: './app.css'
+})
+export class App {
+  protected readonly title = signal('cmp');
+}
+📄 app.html
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<nav>
+  <a routerLink="">Home</a>
+  <a routerLink="about">About</a>
+  <a routerLink="contact">Contact</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+</body>
+</html>
+📄 about.ts
+TypeScript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  standalone: true,
+  templateUrl: './about.html',
+  styleUrl: './about.css'
+})
+export class AboutComponent {}
+📄 contact.ts
+TypeScript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-contact',
+  imports: [],
+  standalone: true,
+  templateUrl: './contact.html',
+  styleUrl: './contact.css'
+})
+export class ContactComponent {}
+📄 home.ts
+TypeScript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  imports: [],
+  standalone: true,
+  templateUrl: './home.html',
+  styleUrl: './home.css'
+})
+export class HomeComponent {}
