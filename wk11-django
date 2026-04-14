@@ -20,7 +20,11 @@ Run Program
 To see output…………..http://127.0.0.1:8000 
 Create App 
 (myenv) E:/Yamuna-FSD/CMR/cmrProject>python manage.py startapp myCMRapp 
+
+
 CMR/cmrproject/cmrproject/settings.py 
+
+
 TEMPLATES = [ 
 { 
 'BACKEND': 'django.template.backends.django.DjangoTemplates', 
@@ -44,8 +48,9 @@ INSTALLED_APPS = [
 'django.contrib.staticfiles', 
 'myCMRapp', 
 ] 
-Yamuna-CSD                                                                                                                                                                                             1 
+
 cmrproject/cmrproject/urls.py 
+
 from django.contrib import admin 
 from django.urls import path 
 from myCMRapp import views 
@@ -72,7 +77,9 @@ cmrproject/cmrproject/myCMRapp/templates/menu.html
 <h3>{{ message }}</h3> 
 </body> 
 </html> 
+
 cmrproject/cmrproject/myCMRapp/views.py 
+
 from django.shortcuts import render 
 def home(request): 
 return render(request, "menu.html", {"message": "This is Home Page"}) 
